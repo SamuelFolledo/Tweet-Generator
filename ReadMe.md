@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 # CS 1.2: Intro to Data Structures
-=======
-# ARCHIVE - CS 2: Tweet Generator: Text Processing & Probability
-
-## NOTE: This repo is no longer maintained
->>>>>>> 4c58a14e6e9946854d89222ed9fe3b91dc37ed8e
 
 ## Course Description
 
