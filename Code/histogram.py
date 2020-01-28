@@ -12,7 +12,7 @@ class Histogram(dict): #create Histogram class from a dictionary
         self.words_count = 0  #total count of all words #tokens
         self.words = [] #list of words
         if lines != None: #if list is not empty, update our properties
-            words_from_line = re.sub("[^\w]", " ",  lines).split() #turns every word in line to an array of words
+            words_from_line = re.sub("[^\w]", " ",  lines).split() #turns every word in line to a list of words
             for word in words_from_line: #loop through each word and get the histogram
                 self.add_count(word)
     
@@ -42,9 +42,14 @@ class Histogram(dict): #create Histogram class from a dictionary
         return False
 
 if __name__ == '__main__':
-    # histogram = histogram("one fish two fish red fish blue fish")
-    # print(f"HISTOGRAM = {histogram}")
-    myGram = Histogram("one fish two fish red fish blue fish")
-    print(f"Histogram = {myGram}")
-    print(f"Unique words count = {myGram.unique_words_count}")
-    print(f"Words count = {myGram.words_count}")
+    my_histogram = Histogram("one fish two fish red fish blue fish") #initialize a histogram from a string
+    print(f"Histogram = {my_histogram}")
+    print(f"Unique words count = {my_histogram.unique_words_count}")
+    print(f"Words count = {my_histogram.words_count}")
+    word = "poop"
+    does_contain = ""
+    if my_histogram.__contains__(word):
+        does_contain = f"appears {my_histogram.frequency(word)}x in"
+    else:
+        does_contain = "does not appear in"
+    print(f"{word} {does_contain} the following histogram {my_histogram}")
