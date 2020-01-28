@@ -41,15 +41,28 @@ class Histogram(dict): #create Histogram class from a dictionary
                 return True
         return False
 
+def create_histogram(source_text):
+    '''create a Histogram from a string'''
+    return Histogram(source_text)
+
+def get_unique_words(histogram):
+    '''get total count of unique words in the histogram'''
+    return histogram.unique_words
+
+def get_frequency(word, histogram):
+    ''' get the frequency of a word from the histogram'''
+    return histogram.frequency(word)
+
+def word_contains(word, histogram):
+    if histogram.__contains__(word):
+        return True
+    return False
+
 if __name__ == '__main__':
     my_histogram = Histogram("one fish two fish red fish blue fish") #initialize a histogram from a string
     print(f"Histogram = {my_histogram}")
     print(f"Unique words count = {my_histogram.unique_words_count}")
     print(f"Words count = {my_histogram.words_count}")
-    word = "poop"
-    does_contain = ""
-    if my_histogram.__contains__(word):
-        does_contain = f"appears {my_histogram.frequency(word)}x in"
-    else:
-        does_contain = "does not appear in"
-    print(f"{word} {does_contain} the following histogram {my_histogram}")
+    word = "fish"
+    does_contain = f"appears {my_histogram.frequency(word)}x in" if word_contains(word, my_histogram) else "does not appear in"
+    print(f"{word} {does_contain} the following histogram: {my_histogram}")
