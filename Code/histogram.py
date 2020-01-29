@@ -34,6 +34,12 @@ class Histogram(dict): #create Histogram class from a dictionary
         frequency = self[word]
         return frequency
 
+    def get_count(self, word):
+        word_count = 0
+        for word in self:
+            word_count = self.get(word, 0) + 1  #if word is in words_histogram's keys, count will increment, else equal 1
+            self[word] = word_count
+
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         for word_history in self:
@@ -59,6 +65,7 @@ def word_contains(word, histogram):
     return False
 
 if __name__ == '__main__':
+    
     my_histogram = Histogram("one fish two fish red fish blue fish") #initialize a histogram from a string
     print(f"Histogram = {my_histogram}")
     print(f"Unique words count = {my_histogram.unique_words_count}")
