@@ -12,7 +12,8 @@ for count in values: #loop through each values in dic
     for player in players:
         if player == "wade":
             print(f"{player} has {count} count")
-
+# myDic.pop(2)
+print(f"my dic is {myDic}")
 
 newDic = {"kobe": 24, "mj":23}
 # print(newDic)
