@@ -12,9 +12,10 @@ class Histogram(dict): #create Histogram class from a dictionary
         self.words_count = 0  #total count of all words #tokens
         self.words = [] #list of words
         if lines != None: #if list is not empty, update our properties
-            words_from_line = re.sub("[^\w]", " ",  lines).split() #turns every word in line to a list of words
-            for word in words_from_line: #loop through each word and get the histogram
-                self.add_count(word)
+            for line in lines:
+                words_from_line = re.sub("[^\w]", " ",  line).split() #turns every word in line to a list of words
+                for word in words_from_line: #loop through each word and get the histogram
+                    self.add_count(word)
     
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
