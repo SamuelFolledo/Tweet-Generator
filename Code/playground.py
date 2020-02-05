@@ -33,20 +33,26 @@ def sample_words(histogram):
     random_num = randint(0, sum_of_values - 1) #get a random num from 0-sum_of_values -1 
     random_weighted_word = ""
     for i in range(20): #test by doing it 10x
-        print(f"Test #{i+1}: {random_num} =", end = " ") #end to not create a new line
+        # print(f"Test #{i+1}: {random_num} =", end = " ") #end to not create a new line
         for w in histogram.items():
             if random_num == 0:
-                print(f"{w[0]}\n")
+                # print(f"{w[0]}\n")
                 random_weighted_word = w[0]
                 break
             if random_num > 0: #if rand_num is greater than 0, then decrement it
                 random_num -= w[1]
             if random_num < 0: #0=one, 1-4=fish, 5=two, 6=red, 7 = blue
-                print(f"{w[0]}\n")
+                # print(f"{w[0]}\n")
                 random_weighted_word = w[0]
                 break
         random_num = randint(0, sum_of_values - 1) # reset the random number
     return random_weighted_word
 
-histogram = {"one": 1, "fish":4, "two": 1, "red": 1, "blue":1} 
-sample_words(histogram)
+# histogram = {"one": 1, "fish":4, "two": 1, "red": 1, "blue":1} 
+# sample_words(histogram)
+
+def get_lines():
+    my_file = open("./words.txt", "r")
+    lines = my_file.readlines()
+    my_file.close()
+    return lines
