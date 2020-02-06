@@ -56,3 +56,31 @@ def get_lines():
     lines = my_file.readlines()
     my_file.close()
     return lines
+
+def listogram(lines): #lines = list of lines, meaning a list of strings
+    listogram = []
+    for line in lines:
+        words_list_from_line = re.sub("[^\w]", " ",  line).split() #turns every word in line to a list of words
+        for word in words_list_from_line:
+            index = get_index(word, listogram)
+            if index == -1:
+                listogram.append([word, 1])
+            else:
+                # listogram[index][1] += 1
+                print(listogram)
+
+def get_index(word, listogram):
+    index = 0
+    print("word is=", word, "---listogram is", listogram)
+    for (word, index) in listogram: #word is a list ["word", count]
+        if word[0] == word:
+            print(f"Found {word} at index: {index}")
+            return index
+        index += 1
+    print("never found it")
+    return -1
+    
+if __name__ == '__main__':
+    lines = get_lines()
+    # print(lines)
+    listogram(lines)
