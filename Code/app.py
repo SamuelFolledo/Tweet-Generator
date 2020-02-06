@@ -9,10 +9,11 @@ def generate_words():
     lines = get_lines()
     myHistogram = Histogram(lines)
     sentence = ""
-    num_words = 4
+    num_words = 10
     for i in range(num_words):
         word = sample_words(myHistogram)
         sentence += " " + word
+    print("Sentence is ", sentence)
     return sentence
 
 if __name__ == '__main__':
