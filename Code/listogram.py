@@ -20,15 +20,11 @@ class Listogram(list):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        print("EROOOO")
-        count = self.frequency(word)
-        print("EROOOO", count)
-        # print("Count is ", count)
-        if self.frequency(word) > 0: #if word exist already
-            # self[word] += count
-            print(f"Frequency of {word} is {count}")
-        else: #if new word
-            # self[word] = count
+        count = self.frequency(word) #get frequency
+        if count > 0: #means word exist and increment count
+            index = self.index_of(word) #must use self.
+            self[index][1] += 1 #increment count of word
+        else: #if new word, append the word with count 1 and increment types
             self.append([word, 1])
             self.types += 1
         self.tokens += count
@@ -37,24 +33,18 @@ class Listogram(list):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
         print("Looking for ", word)
-        if not self.__contains__(word): #checks if word exist in this list
-            return 0
+        if not self.__contains__(word):
+            return 0 #return 0 count if word is not in list
         else: # if it exist
-            index = index_of(word)
-            print("With INDEX ", index)
-            return 1
-        # for word_and_count in self:
-        #     if word_and_count[0] == word:
-        #         print(f"{word} exist!")
-        #         return word_and_count[1]
-        # return 0
+            index = self.index_of(word) #must use self.
+            print(f"{self[index][0]} exist in {self[index][1]}")
+            return self[index][1] #list[index][0] has the word, and list[index][1] has the count
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
         for word_list in self:
             if word == word_list[0]:
-                print(f"List contains {word}")
                 return True
         return False
 
@@ -64,11 +54,9 @@ class Listogram(list):
         # TODO: Implement linear search to find index of entry with target word
         index = 0
         for word_list in self:
-            print("word_list === ",word_list)
             if word_list[0] == target: #if we find the word, then return index
                 return index
-            else: 
-                index += 1
+            index += 1
         return index
 
     def sample(self):
@@ -84,11 +72,11 @@ def print_histogram(word_list):
     # Create a listogram and display its contents
     histogram = Listogram(word_list)
     print('listogram: {}'.format(histogram))
-    # print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
-    # for word in word_list[-2:]:
-    #     freq = histogram.frequency(word)
-    #     print('{!r} occurs {} times'.format(word, freq))
-    # print()
+    print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
+    for word in word_list[-2:]:
+        freq = histogram.frequency(word)
+        print('{!r} occurs {} times'.format(word, freq))
+    print()
     # print_histogram_samples(histogram)
 
 
