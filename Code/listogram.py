@@ -20,20 +20,56 @@ class Listogram(list):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        # TODO: Increase word frequency by count
+        print("EROOOO")
+        count = self.frequency(word)
+        print("EROOOO", count)
+        # print("Count is ", count)
+        if self.frequency(word) > 0: #if word exist already
+            # self[word] += count
+            print(f"Frequency of {word} is {count}")
+        else: #if new word
+            # self[word] = count
+            self.append([word, 1])
+            self.types += 1
+        self.tokens += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        print("Looking for ", word)
+        if not self.__contains__(word): #checks if word exist in this list
+            return 0
+        else: # if it exist
+            index = index_of(word)
+            print("With INDEX ", index)
+            return 1
+        # for word_and_count in self:
+        #     if word_and_count[0] == word:
+        #         print(f"{word} exist!")
+        #         return word_and_count[1]
+        # return 0
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
+        for word_list in self:
+            if word == word_list[0]:
+                print(f"List contains {word}")
+                return True
+        return False
 
     def index_of(self, target):
         """Return the index of entry containing given target word if found in
         this histogram, or None if target word is not found."""
         # TODO: Implement linear search to find index of entry with target word
+        index = 0
+        for word_list in self:
+            print("word_list === ",word_list)
+            if word_list[0] == target: #if we find the word, then return index
+                return index
+            else: 
+                index += 1
+        return index
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
@@ -48,12 +84,12 @@ def print_histogram(word_list):
     # Create a listogram and display its contents
     histogram = Listogram(word_list)
     print('listogram: {}'.format(histogram))
-    print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
-    for word in word_list[-2:]:
-        freq = histogram.frequency(word)
-        print('{!r} occurs {} times'.format(word, freq))
-    print()
-    print_histogram_samples(histogram)
+    # print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
+    # for word in word_list[-2:]:
+    #     freq = histogram.frequency(word)
+    #     print('{!r} occurs {} times'.format(word, freq))
+    # print()
+    # print_histogram_samples(histogram)
 
 
 def print_histogram_samples(histogram):
@@ -103,12 +139,12 @@ def main():
         word = 'abracadabra'
         print_histogram(list(word)) #list(word) turns word to an array of characters
         # Test histogram on words in a classic book title
-        fish_text = 'one fish two fish red fish blue fish'
-        print_histogram(fish_text.split())
-        # Test histogram on words in a long repetitive sentence
-        woodchuck_text = ('how much wood would a wood chuck chuck'
-                          ' if a wood chuck could chuck wood')
-        print_histogram(woodchuck_text.split())
+        # fish_text = 'one fish two fish red fish blue fish'
+        # print_histogram(fish_text.split())
+        # # Test histogram on words in a long repetitive sentence
+        # woodchuck_text = ('how much wood would a wood chuck chuck'
+        #                   ' if a wood chuck could chuck wood')
+        # print_histogram(woodchuck_text.split())
 
 
 if __name__ == '__main__':
