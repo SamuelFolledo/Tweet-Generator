@@ -1,7 +1,7 @@
 #!python
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-import random
+from random import randint
 
 
 class Listogram(list):
@@ -20,8 +20,8 @@ class Listogram(list):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        count = self.frequency(word) #get frequency
-        if count > 0: #means word exist and increment count
+        frequency_count = self.frequency(word) #get frequency
+        if frequency_count > 0: #means word exist and increment count
             index = self.index_of(word) #must use self.
             self[index][1] += 1 #increment count of word
         else: #if new word, append the word with count 1 and increment types
@@ -32,12 +32,12 @@ class Listogram(list):
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
-        print("Looking for ", word)
+        # print("Looking for ", word)
         if not self.__contains__(word):
             return 0 #return 0 count if word is not in list
         else: # if it exist
             index = self.index_of(word) #must use self.
-            print(f"{self[index][0]} exist in {self[index][1]}")
+            # print(f"{self[index][0]} exist in {self[index][1]}")
             return self[index][1] #list[index][0] has the word, and list[index][1] has the count
 
     def __contains__(self, word):
@@ -63,7 +63,22 @@ class Listogram(list):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
-
+        total_count = 0
+        for word_list in self: #for each word, get the total count
+            total_count += word_list[1]
+        random_num = randint(0, total_count - 1) #get random num
+        random_weighted_word = ""
+        for word_list in self:
+            if random_num == 0: #if random num is 0, first word
+                random_weighted_word = word_list[0]
+                break
+            if random_num > 0: #if random num is still greater than 0 then decrement it by word's count
+                random_num -= word_list[1]
+            if random_num < 0:
+                random_weighted_word = word_list[0]
+                break
+        random_num = randint(0, total_count - 1)
+        return random_weighted_word
 
 def print_histogram(word_list):
     print()
@@ -77,7 +92,7 @@ def print_histogram(word_list):
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
     print()
-    # print_histogram_samples(histogram)
+    print_histogram_samples(histogram)
 
 
 def print_histogram_samples(histogram):
@@ -127,12 +142,12 @@ def main():
         word = 'abracadabra'
         print_histogram(list(word)) #list(word) turns word to an array of characters
         # Test histogram on words in a classic book title
-        # fish_text = 'one fish two fish red fish blue fish'
-        # print_histogram(fish_text.split())
-        # # Test histogram on words in a long repetitive sentence
-        # woodchuck_text = ('how much wood would a wood chuck chuck'
-        #                   ' if a wood chuck could chuck wood')
-        # print_histogram(woodchuck_text.split())
+        fish_text = 'one fish two fish red fish blue fish'
+        print_histogram(fish_text.split())
+        # Test histogram on words in a long repetitive sentence
+        woodchuck_text = ('how much wood would a wood chuck chuck'
+                          ' if a wood chuck could chuck wood')
+        print_histogram(woodchuck_text.split())
 
 
 if __name__ == '__main__':
