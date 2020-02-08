@@ -1,35 +1,77 @@
 #!python
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-import random
-
+from random import randint
+import re #for changing lines to words list
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
 
     def __init__(self, word_list=None):
         """Initialize this histogram as a new dict and count given words."""
-        super(Dictogram, self).__init__()  # Initialize this as a new dict
+        super(Dictogram, self).__init__()  # Initialize this as a new list
         # Add properties to track useful word counts for this histogram
-        self.types = 0  # Count of distinct word types in this histogram
-        self.tokens = 0  # Total count of all word tokens in this histogram
-        # Count words in given list, if any
-        if word_list is not None:
+        self.types = 0  #count of unique word #types
+        self.tokens = 0  #total count of all words #tokens
+        if word_list != None: #if list is not empty, update our properties
             for word in word_list:
+                print("words = ", word )
                 self.add_count(word)
+                # words_from_line = re.sub("[^\w]", " ",  line).split() #turns every word in line to a list of words
+                # for word in words: #loop through each word and get the histogram
+                #     self.add_count(word)
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        # TODO: Increase word frequency by count
+        if self.frequency(word) > 0: #if word exist already
+            self[word] += count
+        else: #if new word
+            self[word] = count
+            self.types += 1
+        self.tokens += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
-        # TODO: Retrieve word frequency count
+        if not self.__contains__(word):
+            return 0
+        frequency = self[word]
+        return frequency
+
+    def get_count(self, word):
+        word_count = 0
+        for word in self:
+            word_count = self.get(word, 0) + 1  #if word is in words_histogram's keys, count will increment, else equal 1
+            self[word] = word_count
+
+    def __contains__(self, word):
+        """Return boolean indicating if given word is in this histogram."""
+        for word_history in self:
+            if word == word_history:
+                return True
+        return False
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        sum_of_values = sum(self.values()) #word_counts.values() returns a list of word_count's values. sum() will sum a the values in a list and returns an int
+        random_num = randint(0, sum_of_values - 1) #get a random num from 0-sum_of_values -1 
+        random_weighted_word = ""
+        # for i in range(20): #test by doing it 10x
+            # print(f"Test #{i+1}: {random_num} =", end = " ") #end to not create a new line
+        for w in self.items():
+            if random_num == 0:
+                # print(f"{w[0]}\n")
+                random_weighted_word = w[0]
+                break
+            if random_num > 0: #if rand_num is greater than 0, then decrement it
+                random_num -= w[1]
+            if random_num < 0: #0=one, 1-4=fish, 5=two, 6=red, 7 = blue
+                # print(f"{w[0]}\n")
+                random_weighted_word = w[0]
+                break
+        random_num = randint(0, sum_of_values - 1) # reset the random number
+        return random_weighted_word
 
 
 def print_histogram(word_list):
