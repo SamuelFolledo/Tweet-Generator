@@ -1,6 +1,6 @@
 import random
 import sys
-from helper import get_random_words
+from Helper import get_random_words
 
 quotes = ("It's just a flesh wound.",
           "He's not the Messiah. He's a very naughty boy!",
