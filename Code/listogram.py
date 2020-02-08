@@ -44,7 +44,7 @@ class Listogram(list):
 def print_histogram(word_list):
     print()
     print('Histogram:')
-    print('word list: {}'.format(word_list))
+    print('word list: {}'.format(word_list)) 
     # Create a listogram and display its contents
     histogram = Listogram(word_list)
     print('listogram: {}'.format(histogram))
@@ -101,7 +101,7 @@ def main():
     else:
         # Test histogram on letters in a word
         word = 'abracadabra'
-        print_histogram(list(word))
+        print_histogram(list(word)) #list(word) turns word to an array of characters
         # Test histogram on words in a classic book title
         fish_text = 'one fish two fish red fish blue fish'
         print_histogram(fish_text.split())
