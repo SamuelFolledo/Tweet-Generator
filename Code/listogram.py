@@ -23,9 +23,9 @@ class Listogram(list):
         frequency_count = self.frequency(word) #get frequency
         if frequency_count > 0: #means word exist and increment count
             index = self.index_of(word) #must use self.
-            self[index][1] += 1 #increment count of word
+            self[index][1] += count #increment count of word
         else: #if new word, append the word with count 1 and increment types
-            self.append([word, 1])
+            self.append([word, count])
             self.types += 1
         self.tokens += count
 
