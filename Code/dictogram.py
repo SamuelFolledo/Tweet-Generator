@@ -36,7 +36,7 @@ class Dictogram(dict):
         frequency = self[word]
         return frequency
 
-    def get_count(self, word):
+    def get_count(self, word): #better way with .get()
         word_count = 0
         for word in self:
             word_count = self.get(word, 0) + 1  #if word is in words_histogram's keys, count will increment, else equal 1
