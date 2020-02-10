@@ -1,6 +1,6 @@
 from flask import Flask
-from histogram import Histogram, create_histogram, get_frequency, get_unique_words, word_contains
-from Playground import sample_words, get_lines
+from Code.histogram import Histogram, create_histogram, get_frequency, get_unique_words, word_contains
+from Code.Playground import sample_words, get_lines
 
 app = Flask(__name__)
 
