@@ -79,8 +79,51 @@ def get_index(word, listogram):
         index += 1
     print("never found it")
     return -1
+
+def markov_guy(word_list):
+    chain = {}
+    for i in range(len(word_list)):
+        print(i)
+        if i == len(word_list):
+            break
+        if word_list[i] in chain: #if key(word_list[i]) is in dic...
+            print(f"We got {word_list[i]} already")
+            list_of_words_with_count = chain[word_list[i]] #values([['word1', 1], [word2, 1], ...]) of chain[word_list[i]]
+            for word_and_count in chain[word_list[i]]: #for each word_and_count list in our dic of words...
+                # print(f"list is {chain[word_list[i]]}")
+                # print(word_and_count[0])
+                if i + 1 >= len(word_list):
+                    continue
+                print(f"i+1 = {word_list[i+1]}")
+                if word_and_count[0] == word_list[i+1]: #word_and_count[0] is word and word_and_count[1] is the count...
+                    print(f"We have {word_list[i+1]} already")
+                    # current_count = word_and_count[1]
+                    print(f"KAKAKAK {chain[word_list[i]]}")
+                    # chain[word_list[i+1]] = []
+                    # chain[word_list[i]].append([word_list[i+1], 1])
+            #         print(f"FOUND {word_list[i]}")
+                    break
+                else:
+                    chain[word_list[i]].append([word_list[i+1], 1])
+                    print(f"NOPE {word_list[i+1]} is new")
+            #         chain[word_list[i]] = word_list[i]
+                    print(f"LALALA {chain[word_list[i]]}")
+                    continue
+                
+        else: #word is not in dic yet
+            chain[word_list[i]] = [[word_list[i+1],1]] #word = [[next_word, 1]]
+
+        # result = chain.get(word_list[i], [[word_list[i+1]]) #[[word1: 1], [word2: 1],...]
+        # print(result)
+
+    print(f"CHAIN IS {chain}")
+
+
     
 if __name__ == '__main__':
-    lines = get_lines()
+    # lines = get_lines()
     # print(lines)
-    listogram(lines)
+    # listogram(lines)
+
+    fish_text = 'one fish two fish red fish blue fish blue fish'
+    markov_guy(fish_text.split())
