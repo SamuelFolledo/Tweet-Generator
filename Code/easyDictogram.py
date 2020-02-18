@@ -54,7 +54,7 @@ class EasyDictogram(dict):
             if random_num < 0:
                 random_weighted_word = w[0]
                 break
-        random_num = randint(0, sum_of_values - 1) # reset the random number
+        # random_num = randint(0, sum_of_values - 1) # reset the random number
         return random_weighted_word
 
 def print_dictogram(word_list):
