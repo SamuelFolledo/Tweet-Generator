@@ -57,9 +57,14 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
-        length = 0
-        # while 
-
+        if self.is_empty():
+            return 0
+        length = 1
+        currentNode = self.head
+        while currentNode.next != None:
+            currentNode = currentNode.next
+            length+=1
+        return length
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -67,7 +72,6 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         newNode = Node(item)
         if self.is_empty(): #if head is empty, node's pointer wil be nil
-            print("-----Empty head")
             self.head = newNode
         else:
             currentNode = self.head #make currentNode the head, and loop through til we find the tail
@@ -117,7 +121,6 @@ def test_linked_list():
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
-
     # Enable this after implementing delete method
     # delete_implemented = False
     # if delete_implemented:
