@@ -107,6 +107,8 @@ class LinkedList(object):
         currentNode = self.head
         if currentNode.data == item: #if head has the item
             self.head = currentNode.next #if head has next... assign next as new head
+            if currentNode.next == None: #head is the last item... set self.tail to none
+                self.tail = None
             return
         prev = None
         while currentNode != None: #while did not reach tail
