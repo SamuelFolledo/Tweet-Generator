@@ -56,16 +56,16 @@ class Dictogram(dict):
         sum_of_values = sum(self.values()) #word_counts.values() returns a list of word_count's values. sum() will sum a the values in a list and returns an int
         random_num = randint(0, sum_of_values - 1) #get a random num from 0-sum_of_values -1 
         random_weighted_word = ""
-        for w in self.items():
-            if random_num == 0:
+        for w in self.items(): #decrement random_num by the word's count until random_num is less than 0
+            if random_num == 0: #if random_num is 0 then return the first word in the list
                 random_weighted_word = w[0]
                 break
             if random_num > 0: #if rand_num is greater than 0, then decrement it
                 random_num -= w[1]
-            if random_num < 0:
+            if random_num < 0: #if random_num is less than 0, then we return the word
                 random_weighted_word = w[0]
                 break
-        random_num = randint(0, sum_of_values - 1) # reset the random number
+        # random_num = randint(0, sum_of_values - 1) # reset the random number
         return random_weighted_word
 
 def print_histogram(word_list):

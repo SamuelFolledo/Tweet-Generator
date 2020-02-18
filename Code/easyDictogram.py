@@ -24,7 +24,7 @@ class EasyDictogram(dict):
                 dictionary_histogram[word] += 1
             else: #if new word
                 dictionary_histogram[word] = 1
-        print("Returning... ", dictionary_histogram)
+        # print("Returning... ", dictionary_histogram)
         return dictionary_histogram
 
     def frequency(self, word): #REQUIRED
@@ -36,7 +36,7 @@ class EasyDictogram(dict):
     def unique_words(self): #REQUIRED
         '''returns the number of unique words in the dictionary histogram'''
         #TODO: use your unique words function as a starting point to complete this method
-        print("Unique words = ", len(self.dictionary_histogram))
+        # print("Unique words = ", len(self.dictionary_histogram))
         return len(self.dictionary_histogram)
 
     def sample(self):  #REQUIRED
