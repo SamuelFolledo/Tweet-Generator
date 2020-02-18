@@ -46,7 +46,6 @@ class LinkedList(object):
             # Skip to next node to advance forward in linked list
             node = node.next  # O(1) time to reassign variable
         # Now list contains items from all nodes
-        print("ITEMS =", items)
         return items  # O(1) time to return list
 
     def is_empty(self):
@@ -103,17 +102,40 @@ class LinkedList(object):
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
-
+        if self.is_empty():
+            return
+        currentNode = self.head
+        if currentNode.data == item: #if head has the item
+            self.head = currentNode.next #if head has next... assign next as new head
+            return
+        prev = None
+        while currentNode != None: #while did not reach tail
+            if currentNode.data == item: #if node's data is the item... found!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                if currentNode.next == None: #if currentNode was tail
+                    self.tail = prev #prev node will now be the new tail
+                # if currentNode == self.tail:
+                #     self.tail = None
+                break
+            # TODO: Update previous node to skip around node with matching data
+            prev = currentNode #if currentNode's data is not item, 
+            currentNode = currentNode.next #keep going til it reach the tail
+            
+        if currentNode == None: #if currentNode reached the tail... item is not found
+            self.tail = currentNode.next
+            # TODO: Otherwise raise error to tell user that delete has failed
+            raise ValueError('Item not found: {}'.format(item))
+            return
+        prev.next = currentNode.next #Delete/unlink the node from linked list
+        # self.tail = prev.next
+        # if self.head == None:
+        #     self.tail = None
 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
     print('\nTesting append:')
-    for item in ['A', 'B', 'C']:
+    for item in ['A', 'B', 'C', 'D', 'E']:
         print('append({!r})'.format(item))
         ll.append(item)
         print('list: {}'.format(ll))
@@ -122,18 +144,22 @@ def test_linked_list():
     print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
     # Enable this after implementing delete method
-    # delete_implemented = False
-    # if delete_implemented:
-    #     print('\nTesting delete:')
-    #     for item in ['B', 'C', 'A']:
-    #         print('delete({!r})'.format(item))
-    #         ll.delete(item)
-    #         print('list: {}'.format(ll))
+    delete_implemented = True
+    if delete_implemented:
+        print('\nTesting delete:')
+        for item in ['E', 'A', 'D', 'B', 'C']:
+            print('delete({!r})'.format(item))
+            ll.delete(item)
+            print('list: {}'.format(ll))
+            print('HEADDDD: {}'.format(ll.head))
+            print('TAILLLL: {}'.format(ll.tail))
 
-    #     print('head: {}'.format(ll.head))
-    #     print('tail: {}'.format(ll.tail))
-    #     print('length: {}'.format(ll.length()))
+        # print('head: {}'.format(ll.head))
+        # print('tail: {}'.format(ll.tail))
+        # print('length: {}'.format(ll.length()))
 
 
 if __name__ == '__main__':
     test_linked_list()
+
+### WHY IS MY LAST TAIL NOT GETTING DELETED IN??
