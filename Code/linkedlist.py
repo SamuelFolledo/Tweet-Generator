@@ -46,6 +46,7 @@ class LinkedList(object):
             # Skip to next node to advance forward in linked list
             node = node.next  # O(1) time to reassign variable
         # Now list contains items from all nodes
+        print("ITEMS =", items)
         return items  # O(1) time to return list
 
     def is_empty(self):
@@ -56,18 +57,35 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
+        length = 0
+        # while 
+
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
-        # TODO: Append node after tail, if it exists
+        newNode = Node(item)
+        if self.is_empty(): #if head is empty, node's pointer wil be nil
+            print("-----Empty head")
+            self.head = newNode
+        else:
+            currentNode = self.head #make currentNode the head, and loop through til we find the tail
+            while currentNode.next != None: #while not at tail
+                currentNode = currentNode.next #traverse to next node
+            # TODO: Append node after tail, if it exists
+            currentNode.next = newNode #now that we are at tail, point tail to newNode
+        self.tail = newNode #assign newNode as the tail
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
+        newNode = Node(item)
         # TODO: Prepend node before head, if it exists
+        if self.is_empty == False: #if head is not empty, point newNode to the current head
+            newNode.next = self.head
+        self.head = newNode #assign newNode to be the head
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -101,17 +119,17 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
-    if delete_implemented:
-        print('\nTesting delete:')
-        for item in ['B', 'C', 'A']:
-            print('delete({!r})'.format(item))
-            ll.delete(item)
-            print('list: {}'.format(ll))
+    # delete_implemented = False
+    # if delete_implemented:
+    #     print('\nTesting delete:')
+    #     for item in ['B', 'C', 'A']:
+    #         print('delete({!r})'.format(item))
+    #         ll.delete(item)
+    #         print('list: {}'.format(ll))
 
-        print('head: {}'.format(ll.head))
-        print('tail: {}'.format(ll.tail))
-        print('length: {}'.format(ll.length()))
+    #     print('head: {}'.format(ll.head))
+    #     print('tail: {}'.format(ll.tail))
+    #     print('length: {}'.format(ll.length()))
 
 
 if __name__ == '__main__':
