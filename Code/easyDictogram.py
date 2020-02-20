@@ -42,20 +42,15 @@ class EasyDictogram(dict):
     def sample(self):  #REQUIRED
         '''Randomly samples from the dictionary histogram based on the frequency, returns a word'''
         #TODO: use your sample function as a starting point to complete this method 
-        sum_of_values = sum(self.dictionary_histogram.values()) #word_counts.values() returns a list of word_count's values. sum() will sum a the values in a list and returns an int
+        sum_of_values = sum(self.dictionary_histogram.values())
         random_num = randint(0, sum_of_values - 1) #get a random num from 0-sum_of_values -1 
-        random_weighted_word = ""
-        for w in self.dictionary_histogram.items():
+        for histogram in self.dictionary_histogram.items():
             if random_num == 0:
-                random_weighted_word = w[0]
-                break
-            if random_num > 0: #if rand_num is greater than 0, then decrement it
-                random_num -= w[1]
-            if random_num < 0:
-                random_weighted_word = w[0]
-                break
-        # random_num = randint(0, sum_of_values - 1) # reset the random number
-        return random_weighted_word
+                return histogram[0]
+            if random_num > 0: #if rand_num is greater than 0, then decrement random_num
+                random_num -= histogram[1]
+            if random_num < 0: #if random_num is < 0 then that is our weighted word
+                return histogram[0]
 
 def print_dictogram(word_list):
     '''Creates a dictionary based histogram (dictogram) and then prints out its properties and samples from it'''
