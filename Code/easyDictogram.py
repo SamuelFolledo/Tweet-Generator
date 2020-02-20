@@ -18,9 +18,9 @@ class EasyDictogram(dict):
     def build_dictogram(self): #REQUIRED
         '''Creates a histogram dictionary using the word_list property and returns it'''
         dictionary_histogram = {}
-        for word in self.word_list:
-            word_count = dictionary_histogram.get(word, 0)
-            if word_count > 0:
+        for word in self.word_list: #loop through each word in the list
+            word_count = dictionary_histogram.get(word, 0) #get the count of the word
+            if word_count > 0: #increment count if word exist
                 dictionary_histogram[word] += 1
             else: #if new word
                 dictionary_histogram[word] = 1
