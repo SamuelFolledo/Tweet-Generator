@@ -84,13 +84,19 @@ class LinkedList(object):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
-        newNode = Node(item)
+        newNode = Node(item) #create a node with that item
         # TODO: Prepend node before head, if it exists
-        if self.is_empty == False: #if head is not empty, point newNode to the current head
-            newNode.next = self.head
-        self.head = newNode #assign newNode to be the head
+        if self.is_empty: #if list is empty...
+            self.head = newNode
+            self.tail = newNode
 
-    def find(self, quality):
+
+        if self.is_empty == False: #if head has data... point newNode to the current head
+            newNode.next = self.head
+            self.head = newNode #assign newNode as the head
+            return
+
+    def find(self, quality): #do we return anything?
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
@@ -103,6 +109,7 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
         if self.is_empty():
+            ValueError('Item not found: {}'.format(item))
             return
         currentNode = self.head
         if currentNode.data == item: #if head has the item
@@ -110,27 +117,22 @@ class LinkedList(object):
             if currentNode.next == None: #head is the last item... set self.tail to none
                 self.tail = None
             return
-        prev = None
-        while currentNode != None: #while did not reach tail
-            if currentNode.data == item: #if node's data is the item... found!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                if currentNode.next == None: #if currentNode was tail
-                    self.tail = prev #prev node will now be the new tail
-                # if currentNode == self.tail:
-                #     self.tail = None
-                break
-            # TODO: Update previous node to skip around node with matching data
-            prev = currentNode #if currentNode's data is not item, 
-            currentNode = currentNode.next #keep going til it reach the tail
-            
         if currentNode == None: #if currentNode reached the tail... item is not found
             self.tail = currentNode.next
             # TODO: Otherwise raise error to tell user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
             return
-        prev.next = currentNode.next #Delete/unlink the node from linked list
-        # self.tail = prev.next
-        # if self.head == None:
-        #     self.tail = None
+        prev = None
+        while currentNode != None: #loop until we reach tail
+            if currentNode.data == item: #if node's data is the item... found!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                if currentNode.next == None: #if currentNode was the tail
+                    self.tail = prev #prev node will now be the new tail
+                prev.next = currentNode.next #DELETE currentNode by removing prev's next (reference) to currentNode's next
+                return
+            # TODO: Update previous node to skip around node with matching data
+            prev = currentNode #if currentNode's data is not item, 
+            currentNode = currentNode.next #keep going til it reach the tail
+        ValueError('Item not found: {}'.format(item))
 
 def test_linked_list():
     ll = LinkedList()

@@ -14,13 +14,14 @@ class MarkovChain:
     def build_markov(self, word_list):
         markov_chain = {}
 
-        for i in range(len(word_list) - 1): #loop through each word, and dont include
+        for i in range(len(word_list) - 1): #loop through each word
             #get the current word and the word after
             current_word = word_list[i]
             next_word = word_list[i+1]
             if current_word in markov_chain.keys(): #already there
                 #get the histogram for that word in the chain
                 histogram = markov_chain[current_word]
+                print("Histogram ======== ", histogram)
                 #add to count
                 histogram.dictionary_histogram[next_word] = histogram.dictionary_histogram.get(next_word, 0) + 1
             else: #first entry
