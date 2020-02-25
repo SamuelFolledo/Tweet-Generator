@@ -58,11 +58,11 @@ class LinkedList(object):
         # TODO: Loop through all nodes and count one for each
         if self.is_empty():
             return 0
-        length = 1
+        length = 0
         currentNode = self.head
-        while currentNode.next != None:
-            currentNode = currentNode.next
+        while currentNode != None:
             length+=1
+            currentNode = currentNode.next
         return length
 
     def append(self, item):
@@ -72,13 +72,17 @@ class LinkedList(object):
         newNode = Node(item)
         if self.is_empty(): #if head is empty, node's pointer wil be nil
             self.head = newNode
+            self.tail = newNode
+            return
         else:
-            currentNode = self.head #make currentNode the head, and loop through til we find the tail
-            while currentNode.next != None: #while not at tail
-                currentNode = currentNode.next #traverse to next node
-            # TODO: Append node after tail, if it exists
-            currentNode.next = newNode #now that we are at tail, point tail to newNode
-        self.tail = newNode #assign newNode as the tail
+            self.tail.next = newNode
+            self.tail = newNode
+            # currentNode = self.head #make currentNode the head, and loop through til we find the tail
+            # while currentNode.next != None: #while not at tail
+            #     currentNode = currentNode.next #traverse to next node
+            # # TODO: Append node after tail, if it exists
+            # currentNode.next = newNode #now that we are at tail, point tail to newNode
+            # self.tail = newNode #assign newNode as the tail
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -86,22 +90,31 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         newNode = Node(item) #create a node with that item
         # TODO: Prepend node before head, if it exists
-        if self.is_empty: #if list is empty...
+        if self.is_empty(): #if list is empty...
+            print("List is empty")
             self.head = newNode
             self.tail = newNode
-
-
-        if self.is_empty == False: #if head has data... point newNode to the current head
-            newNode.next = self.head
-            self.head = newNode #assign newNode as the head
             return
+        print("List not empty")
+        newNode.next = self.head #point newNode's next to current head
+        self.head = newNode #assign newNode as the head
+        print("List = ", self)
+        return
 
     def find(self, quality): #do we return anything?
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
+        if self.is_empty():
+            return
         # TODO: Loop through all nodes to find item where quality(item) is True
-        # TODO: Check if node's data satisfies given quality function
+        current = self.head
+        while current != None:
+            # TODO: Check if node's data satisfies given quality function
+            if quality(current.data):
+                return True
+            current = current.next
+        return None        
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -109,7 +122,7 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
         if self.is_empty():
-            ValueError('Item not found: {}'.format(item))
+            raise ValueError('Item not found: {}'.format(item))
             return
         currentNode = self.head
         if currentNode.data == item: #if head has the item
@@ -117,22 +130,24 @@ class LinkedList(object):
             if currentNode.next == None: #head is the last item... set self.tail to none
                 self.tail = None
             return
-        if currentNode == None: #if currentNode reached the tail... item is not found
-            self.tail = currentNode.next
-            # TODO: Otherwise raise error to tell user that delete has failed
-            raise ValueError('Item not found: {}'.format(item))
-            return
+        # if currentNode == None: #if currentNode reached the tail... item is not found
+        #     self.tail = currentNode.next
+        #     # TODO: Otherwise raise error to tell user that delete has failed
+        #     raise ValueError('Item not found: {}'.format(item))
+        #     return
         prev = None
         while currentNode != None: #loop until we reach tail
+            print("Current node =", currentNode)
             if currentNode.data == item: #if node's data is the item... found!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                if currentNode.next == None: #if currentNode was the tail
+                if currentNode.next == None: #if currentNode is the tail because it has no next...
                     self.tail = prev #prev node will now be the new tail
                 prev.next = currentNode.next #DELETE currentNode by removing prev's next (reference) to currentNode's next
                 return
             # TODO: Update previous node to skip around node with matching data
             prev = currentNode #if currentNode's data is not item, 
             currentNode = currentNode.next #keep going til it reach the tail
-        ValueError('Item not found: {}'.format(item))
+            print("Current.next = ", currentNode)
+        raise ValueError('Item not found: {}'.format(item))
 
 def test_linked_list():
     ll = LinkedList()
@@ -164,6 +179,24 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    test_linked_list()
+    # test_linked_list()
+
+    ll = LinkedList()
+
+    ll.append('C')
+    print(ll.length())
+    # print(ll.head, " = ", ll.tail)
+    ll.append('B')
+    print(ll.length())
+    # print(ll.head, " = ", ll.tail)
+    ll.append('A')
+    print(ll.length())
+    # print(ll.head, " = ", ll.tail)
+    print(ll)
+
+    # print(ll.length())
+    # # ll.prepend('B')
+    # print(ll)
+    # print(ll.length())
 
 ### WHY IS MY LAST TAIL NOT GETTING DELETED IN??

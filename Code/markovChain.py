@@ -21,12 +21,12 @@ class MarkovChain:
             if current_word in markov_chain.keys(): #already there
                 #get the histogram for that word in the chain
                 histogram = markov_chain[current_word]
-                print("Histogram ======== ", histogram)
+                print("Histogram ======== ", current_word, " = ", histogram)
                 #add to count
                 histogram.dictionary_histogram[next_word] = histogram.dictionary_histogram.get(next_word, 0) + 1
             else: #first entry
                 markov_chain[current_word] = EasyDictogram([next_word])
-
+        print("Markov chain = ", markov_chain)
         return markov_chain
 
     def get_random_word(self): #choose a random for from markov chain's keys, which are unique
