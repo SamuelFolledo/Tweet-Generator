@@ -82,9 +82,8 @@ class HashTable(object):
             self.buckets.append(ll)
             print("Added=", ll, "\tnode=", newNode)
             return
-        for (index, bucket) in enumerate(self.buckets): #bucket is a linkedList
-            ll = LinkedList()
-            # print()
+        for (index, linked_list) in enumerate(self.buckets): #loop through each bucket which is a linkedList
+            if linked_list.
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket

@@ -107,13 +107,13 @@ class LinkedList(object):
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         if self.is_empty():
-            return
+            return None
         # TODO: Loop through all nodes to find item where quality(item) is True
         current = self.head
         while current != None:
             # TODO: Check if node's data satisfies given quality function
             if quality(current.data):
-                return True
+                return current.data
             current = current.next
         return None        
 
