@@ -1,7 +1,6 @@
 #!python
 
-from linkedlist import LinkedList
-
+from linkedlist import LinkedList, Node
 
 class HashTable(object):
 
@@ -65,6 +64,8 @@ class HashTable(object):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
+        for bucket in self.buckets:
+            print("Bucket =", bucket)
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, return value associated with given key
         # TODO: Otherwise, raise error to tell user get failed
@@ -74,6 +75,16 @@ class HashTable(object):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
+        if len(self.buckets) == 0: #if list is empty
+            ll = LinkedList()
+            newNode = Node((key, value))
+            ll.prepend(newNode)
+            self.buckets.append(ll)
+            print("Added=", ll, "\tnode=", newNode)
+            return
+        for (index, bucket) in enumerate(self.buckets): #bucket is a linkedList
+            ll = LinkedList()
+            # print()
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
@@ -93,30 +104,30 @@ def test_hash_table():
     print('hash table: {}'.format(ht))
 
     print('\nTesting set:')
-    for key, value in [('I', 1), ('V', 5), ('X', 10)]:
+    for key, value in [('I', 1), ('V', 5), ('X', 10)]: #("I",1) is a data of the node
         print('set({!r}, {!r})'.format(key, value))
         ht.set(key, value)
-        print('hash table: {}'.format(ht))
+        print('hash table: {}'.format(ht.__repr__))
 
-    print('\nTesting get:')
-    for key in ['I', 'V', 'X']:
-        value = ht.get(key)
-        print('get({!r}): {!r}'.format(key, value))
+    # print('\nTesting get:')
+    # for key in ['I', 'V', 'X']:
+    #     value = ht.get(key)
+    #     print('get({!r}): {!r}'.format(key, value))
 
-    print('contains({!r}): {}'.format('X', ht.contains('X')))
-    print('length: {}'.format(ht.length()))
+    # print('contains({!r}): {}'.format('X', ht.contains('X')))
+    # print('length: {}'.format(ht.length()))
 
-    # Enable this after implementing delete method
-    delete_implemented = False
-    if delete_implemented:
-        print('\nTesting delete:')
-        for key in ['I', 'V', 'X']:
-            print('delete({!r})'.format(key))
-            ht.delete(key)
-            print('hash table: {}'.format(ht))
+    # # Enable this after implementing delete method
+    # delete_implemented = False
+    # if delete_implemented:
+    #     print('\nTesting delete:')
+    #     for key in ['I', 'V', 'X']:
+    #         print('delete({!r})'.format(key))
+    #         ht.delete(key)
+    #         print('hash table: {}'.format(ht))
 
-        print('contains(X): {}'.format(ht.contains('X')))
-        print('length: {}'.format(ht.length()))
+    #     print('contains(X): {}'.format(ht.contains('X')))
+    #     print('length: {}'.format(ht.length()))
 
 
 if __name__ == '__main__':

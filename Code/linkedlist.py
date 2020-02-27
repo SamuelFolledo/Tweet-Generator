@@ -1,5 +1,6 @@
 #!python
 
+import time
 
 class Node(object):
 
