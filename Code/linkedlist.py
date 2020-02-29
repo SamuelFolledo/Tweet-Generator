@@ -131,11 +131,6 @@ class LinkedList(object):
             if currentNode.next == None: #head is the last item... set self.tail to none
                 self.tail = None
             return
-        # if currentNode == None: #if currentNode reached the tail... item is not found
-        #     self.tail = currentNode.next
-        #     # TODO: Otherwise raise error to tell user that delete has failed
-        #     raise ValueError('Item not found: {}'.format(item))
-        #     return
         prev = None
         while currentNode != None: #loop until we reach tail
             print("Current node =", currentNode)
@@ -148,6 +143,7 @@ class LinkedList(object):
             prev = currentNode #if currentNode's data is not item, 
             currentNode = currentNode.next #keep going til it reach the tail
             print("Current.next = ", currentNode)
+        # TODO: Otherwise raise error to tell user that delete has failed
         raise ValueError('Item not found: {}'.format(item))
 
 def test_linked_list():
@@ -174,30 +170,10 @@ def test_linked_list():
             print('HEADDDD: {}'.format(ll.head))
             print('TAILLLL: {}'.format(ll.tail))
 
-        # print('head: {}'.format(ll.head))
-        # print('tail: {}'.format(ll.tail))
-        # print('length: {}'.format(ll.length()))
+        print('head: {}'.format(ll.head))
+        print('tail: {}'.format(ll.tail))
+        print('length: {}'.format(ll.length()))
 
 
 if __name__ == '__main__':
-    # test_linked_list()
-
-    ll = LinkedList()
-
-    ll.append('C')
-    print(ll.length())
-    # print(ll.head, " = ", ll.tail)
-    ll.append('B')
-    print(ll.length())
-    # print(ll.head, " = ", ll.tail)
-    ll.append('A')
-    print(ll.length())
-    # print(ll.head, " = ", ll.tail)
-    print(ll)
-
-    # print(ll.length())
-    # # ll.prepend('B')
-    # print(ll)
-    # print(ll.length())
-
-### WHY IS MY LAST TAIL NOT GETTING DELETED IN??
+    test_linked_list()

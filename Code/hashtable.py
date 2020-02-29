@@ -7,7 +7,7 @@ class HashTable(object):
     def __init__(self, init_size=8):
         """Initialize this hash table with the given initial size."""
         # Create a new list (used as fixed-size array) of empty linked lists
-        self.buckets = [LinkedList() for _ in range(init_size)]
+        self.buckets = [LinkedList() for _ in range(init_size)] #create empty linked lists
 
     def __str__(self):
         """Return a formatted string representation of this hash table."""
@@ -75,18 +75,16 @@ class HashTable(object):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
-        if len(self.buckets) == 0: #if list is empty
-            ll = LinkedList()
-            newNode = Node((key, value))
-            ll.prepend(newNode)
-            self.buckets.append(ll)
-            print("Added=", ll, "\tnode=", newNode)
-            return
-        for (index, linked_list) in enumerate(self.buckets): #loop through each bucket which is a linkedList
-            if linked_list.
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
+        bucket = self.buckets[hash(key) % len(self.buckets)] #use the key to get the bucket index with the hash function. then get the linked list inside the bucket
+        print(bucket)
+        item = bucket.find(lambda item: item == key) #lambda is a nameless function. Find the item in the linked list
+        if item is not None:
+            print(item)
+        else:
+            bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
