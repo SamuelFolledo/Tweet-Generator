@@ -64,12 +64,16 @@ class HashTable(object):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
-        for bucket in self.buckets:
-            print("Bucket =", bucket)
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, return value associated with given key
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        bucket = self.buckets[hash(key) % len(self.buckets)] #finds the bucket the key belongs
+        for item_key, value in bucket.items():
+            print("Thing is", item_key, "and", value)
+            if item_key == key:
+                return value
+        raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -83,6 +87,7 @@ class HashTable(object):
         item = bucket.find(lambda item: item == key) #lambda is a nameless function. Find the item in the linked list
         if item is not None:
             print(item)
+            bucket.replace(item, (key, value))
         else:
             bucket.append((key, value))
 
@@ -104,12 +109,12 @@ def test_hash_table():
     for key, value in [('I', 1), ('V', 5), ('X', 10)]: #("I",1) is a data of the node
         print('set({!r}, {!r})'.format(key, value))
         ht.set(key, value)
-        print('hash table: {}'.format(ht.__repr__))
+        print('hash table: {}'.format(ht))
 
-    # print('\nTesting get:')
-    # for key in ['I', 'V', 'X']:
-    #     value = ht.get(key)
-    #     print('get({!r}): {!r}'.format(key, value))
+    print('\nTesting get:')
+    for key in ['I', 'V', 'X']:
+        value = ht.get(key)
+        print('get({!r}): {!r}'.format(key, value))
 
     # print('contains({!r}): {}'.format('X', ht.contains('X')))
     # print('length: {}'.format(ht.length()))
