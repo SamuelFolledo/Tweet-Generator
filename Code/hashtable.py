@@ -70,7 +70,6 @@ class HashTable(object):
         # Hint: raise KeyError('Key not found: {}'.format(key))
         bucket = self.buckets[hash(key) % len(self.buckets)] #finds the bucket the key belongs
         for item_key, value in bucket.items():
-            print("Thing is", item_key, "and", value)
             if item_key == key:
                 return value
         raise KeyError('Key not found: {}'.format(key))
@@ -86,9 +85,8 @@ class HashTable(object):
         print(bucket)
         item = bucket.find(lambda item: item == key) #lambda is a nameless function. Find the item in the linked list
         if item is not None:
-            print(item)
             bucket.replace(item, (key, value))
-        else:
+        else: #if item does not exist, then append
             bucket.append((key, value))
 
     def delete(self, key):
@@ -99,6 +97,12 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        bucket = self.buckets[hash(key) % len(self.buckets)]
+        item = bucket.find(lambda item: item[0] == key)
+        if item is not None:
+            bucket.delete(item)
+        else:
+            raise KeyError(f'Key not found: {key}')
 
 
 def test_hash_table():
@@ -116,20 +120,20 @@ def test_hash_table():
         value = ht.get(key)
         print('get({!r}): {!r}'.format(key, value))
 
-    # print('contains({!r}): {}'.format('X', ht.contains('X')))
-    # print('length: {}'.format(ht.length()))
+    print('contains({!r}): {}'.format('X', ht.contains('X')))
+    print('length: {}'.format(ht.length()))
 
-    # # Enable this after implementing delete method
-    # delete_implemented = False
-    # if delete_implemented:
-    #     print('\nTesting delete:')
-    #     for key in ['I', 'V', 'X']:
-    #         print('delete({!r})'.format(key))
-    #         ht.delete(key)
-    #         print('hash table: {}'.format(ht))
+    # Enable this after implementing delete method
+    delete_implemented = False
+    if delete_implemented:
+        print('\nTesting delete:')
+        for key in ['I', 'V', 'X']:
+            print('delete({!r})'.format(key))
+            ht.delete(key)
+            print('hash table: {}'.format(ht))
 
-    #     print('contains(X): {}'.format(ht.contains('X')))
-    #     print('length: {}'.format(ht.length()))
+        print('contains(X): {}'.format(ht.contains('X')))
+        print('length: {}'.format(ht.length()))
 
 
 if __name__ == '__main__':
