@@ -97,11 +97,15 @@ class HashTable(object):
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
         bucket = self.buckets[hash(key) % len(self.buckets)] #use the key to get the bucket index with the hash function. then get the linked list inside the bucket
-        print(bucket)
-        item = bucket.find(lambda item: item == key) #lambda is a nameless function. Find the item in the linked list
+        print(f"{key} and {value} is at bucket ", bucket)
+        item = bucket.find(lambda item: item[0] == key) #lambda is a nameless function. Find the item in the linked list
         if item is not None:
-            bucket.replace(item, (key, value))
+            print(f"Item {item} is not None")
+            data = bucket.find(item)
+
+            # bucket.replace(item, (key, value))
         else: #if item does not exist, then append
+            print(f"Item {item}!!")
             bucket.append((key, value))
 
     def delete(self, key):
@@ -152,4 +156,11 @@ def test_hash_table():
 
 
 if __name__ == '__main__':
-    test_hash_table()
+    # test_hash_table()
+    ht = HashTable()
+    ht.set('I', 1)
+    ht.set('V', 4)
+    ht.set('X', 9)
+    ht.set('V', 5)  # Update value
+    ht.set('X', 10)  # Update value
+    print(ht)

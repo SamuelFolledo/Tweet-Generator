@@ -92,15 +92,11 @@ class LinkedList(object):
         newNode = Node(item) #create a node with that item
         # TODO: Prepend node before head, if it exists
         if self.is_empty(): #if list is empty...
-            print("List is empty")
             self.head = newNode
             self.tail = newNode
             return
-        print("List not empty")
         newNode.next = self.head #point newNode's next to current head
         self.head = newNode #assign newNode as the head
-        print("List = ", self)
-        return
 
     def find(self, quality): #do we return anything?
         """Return an item from this linked list satisfying the given quality.
