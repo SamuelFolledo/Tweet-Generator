@@ -146,8 +146,6 @@ class LinkedList(object):
         '''Updates list by checking if data passed exist,
         if data exist in the list, delete then append
         if not just append'''
-        # ll = LinkedList()
-        
         for item in self.items():
             if item[0] == data[0]:
                 print(f"Updating {item} to {data}")
