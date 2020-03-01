@@ -142,6 +142,20 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         raise ValueError('Item not found: {}'.format(item))
 
+    def update_list(self, data):
+        '''Updates list by checking if data passed exist,
+        if data exist in the list, delete then append
+        if not just append'''
+        # ll = LinkedList()
+        
+        for item in self.items():
+            if item[0] == data[0]:
+                print(f"Updating {item} to {data}")
+                self.delete(item)
+            else:
+                continue
+            self.append(data)
+
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
@@ -173,3 +187,12 @@ def test_linked_list():
 
 if __name__ == '__main__':
     test_linked_list()
+    
+
+        # if nodeData[0] == item:
+        #     print("deletinggggg")
+        #     ll.delete(data)
+        # else:
+        #     ll.append(nodeData)
+        # print('list: {}'.format(ll))
+    # print('list: {}'.format(ll))
