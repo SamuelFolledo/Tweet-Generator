@@ -1,7 +1,8 @@
 # CS 1.2: Intro to Data Structures
 
-## Course Description
+Available at https://sf-tweet-generator.herokuapp.com/
 
+## Course Description
 A project based course that looks under the hood at data structures and algorithms to see how they work. In addition to implementing these structures in an application; students will build them from scratch, analyze their complexity, and benchmark their performance to gain an understanding of their tradeoffs and when to use them in practice. Students will write scripts, functions, and library modules to use text processing tools like regular expressions, construct and sample probability distributions to create a Markov language model and gain insight into how grammar works and natural language processing techniques.
 
 
