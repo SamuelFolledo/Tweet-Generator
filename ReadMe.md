@@ -4,7 +4,7 @@ Sentence generator using [Markov Chain](https://brilliant.org/wiki/markov-chains
 Live at https://sf-tweet-generator.herokuapp.com/
 
 ## Demo
-<img src="https://github.com/SamuelFolledo/Tweet-Generator/blob/master/static/tweetGeneratorDemo.gif" width="896" height="521">
+<img src="https://github.com/SamuelFolledo/Tweet-Generator/blob/master/static/tweetGeneratorDemo.gif" width="960" height="795">
 
 ## Course Description
 A project based course that looks under the hood at data structures and algorithms to see how they work. In addition to implementing these structures in an application; students will build them from scratch, analyze their complexity, and benchmark their performance to gain an understanding of their tradeoffs and when to use them in practice. Students will write scripts, functions, and library modules to use text processing tools like regular expressions, construct and sample probability distributions to create a Markov language model and gain insight into how grammar works and natural language processing techniques.
