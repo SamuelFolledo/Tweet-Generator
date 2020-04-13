@@ -141,10 +141,12 @@ class LinkedList(object):
         if data exist in the list, delete then append
         if not just append'''
         for item in self.items():
-            if item[0] == data[0]:
+            if item[0] == data[0]: #if key exist in a tuple, array, dictionary or hash table look until data exist and delete it
                 print(f"Updating {item} to {data}")
-                self.delete(item)
-            self.append(data)
+                # self.delete(item) #delete and append
+                # self.append(data)
+                #For future, create a update function instead of deleting and appending
+                item[1] = data[1]
 
 def test_linked_list():
     ll = LinkedList()
