@@ -71,19 +71,14 @@ class LinkedList(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         newNode = Node(item)
-        if self.is_empty(): #if head is empty, node's pointer wil be nil
+        # TODO: Append node after tail, if it exists
+        if self.is_empty(): #if head is empty, then append to head
             self.head = newNode
             self.tail = newNode
             return
-        else:
+        else: #point tail's next to newNode and assign newNode as the new tail
             self.tail.next = newNode
             self.tail = newNode
-            # currentNode = self.head #make currentNode the head, and loop through til we find the tail
-            # while currentNode.next != None: #while not at tail
-            #     currentNode = currentNode.next #traverse to next node
-            # # TODO: Append node after tail, if it exists
-            # currentNode.next = newNode #now that we are at tail, point tail to newNode
-            # self.tail = newNode #assign newNode as the tail
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -120,7 +115,6 @@ class LinkedList(object):
         # TODO: Loop through all nodes to find one whose data matches given item
         if self.is_empty():
             raise ValueError('Item not found: {}'.format(item))
-            return
         currentNode = self.head
         if currentNode.data == item: #if head has the item
             self.head = currentNode.next #if head has next... assign next as new head
