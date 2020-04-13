@@ -144,8 +144,6 @@ class LinkedList(object):
             if item[0] == data[0]:
                 print(f"Updating {item} to {data}")
                 self.delete(item)
-            else:
-                continue
             self.append(data)
 
 def test_linked_list():
@@ -153,28 +151,31 @@ def test_linked_list():
     print('list: {}'.format(ll))
 
     print('\nTesting append:')
-    for item in ['A', 'B', 'C', 'D', 'E']:
+    for item in [['A', 1], ['B', 2], ['C', 3], ['D', 4], ['E', 5]]:
         print('append({!r})'.format(item))
         ll.append(item)
         print('list: {}'.format(ll))
 
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('length: {}'.format(ll.length()))
-    # Enable this after implementing delete method
-    delete_implemented = True
-    if delete_implemented:
-        print('\nTesting delete:')
-        for item in ['E', 'A', 'D', 'B', 'C']:
-            print('delete({!r})'.format(item))
-            ll.delete(item)
-            print('list: {}'.format(ll))
-            print('HEADDDD: {}'.format(ll.head))
-            print('TAILLLL: {}'.format(ll.tail))
+    ll.update_list(['C', 1])
+    print('list: {}'.format(ll))
 
-        print('head: {}'.format(ll.head))
-        print('tail: {}'.format(ll.tail))
-        print('length: {}'.format(ll.length()))
+    # print('head: {}'.format(ll.head))
+    # print('tail: {}'.format(ll.tail))
+    # print('length: {}'.format(ll.length()))
+    # # Enable this after implementing delete method
+    # delete_implemented = True
+    # if delete_implemented:
+    #     print('\nTesting delete:')
+    #     for item in ['E', 'A', 'D', 'B', 'C']:
+    #         print('delete({!r})'.format(item))
+    #         ll.delete(item)
+    #         print('list: {}'.format(ll))
+    #         print('HEADDDD: {}'.format(ll.head))
+    #         print('TAILLLL: {}'.format(ll.tail))
+
+    #     print('head: {}'.format(ll.head))
+    #     print('tail: {}'.format(ll.tail))
+    #     print('length: {}'.format(ll.length()))
 
 
 if __name__ == '__main__':
